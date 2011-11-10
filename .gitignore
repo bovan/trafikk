@@ -1,0 +1,39 @@
+# Ignore private folder
+/Private/*
+!/Private/empty
+
+# MAC
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Eclipse project files
+/.cache
+.project
+/.settings
+.buildpath
+
+# Cake TMP Dirs
+/tmp/*
+!/tmp/
+
+/tmp/cache/*
+!/tmp/cache/
+!/tmp/cache/empty
+
+/tmp/cache/models/*
+!/tmp/cache/models/
+!/tmp/cache/models/empty
+
+/tmp/cache/persistent/*
+!/tmp/cache/persistent/
+!/tmp/cache/persistent/empty
+
+/tmp/cache/views/*
+!/tmp/cache/views/
+!/tmp/cache/views/empty
+
+# Top secret stuff
+/Config/core.php
+/Config/database.php
