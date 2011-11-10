@@ -1,6 +1,15 @@
 # Trafikk #
 
+Currently pre-alpha until todo-list below is complete
+
 A revisited version of my old, now broken, trafikk.org site. 
+
+## Uses ##
+
+* CakePHP 2.0
+* jQuery
+* jQuery Mobile
+* Google Maps
 
 ## Functionality ##
 
