@@ -28,6 +28,7 @@
 		echo $this->Html->meta('icon');
 
 		echo $this->Html->css('cake.generic');
+                echo $this->Html->css('../libs/jquery.mobile-1.0rc2/jquery.mobile-1.0rc2.min.css');
 
 		echo $scripts_for_layout;
 	?>
@@ -54,5 +55,7 @@
 		</div>
 	</div>
 	<?php echo $this->element('sql_dump'); ?>
+    <?php echo $this->Html->script('../libs/jquery-1.7.min.js'); ?>
+    <?php echo $this->Html->script('../libs/jquery.mobile-1.0rc2/jquery.mobile-1.0rc2.min.js'); ?>
 </body>
 </html>
