@@ -57,5 +57,6 @@
 	<?php echo $this->element('sql_dump'); ?>
     <?php echo $this->Html->script('../libs/jquery-1.7.min.js'); ?>
     <?php echo $this->Html->script('../libs/jquery.mobile-1.0rc2/jquery.mobile-1.0rc2.min.js'); ?>
+    <?php echo $this->Html->script('http://maps.googleapis.com/maps/api/js?sensor=true'); ?>
 </body>
 </html>
