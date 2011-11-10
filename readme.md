@@ -8,8 +8,8 @@ A revisited version of my old, now broken, trafikk.org site.
 
 ## TODO ##
 
-1. Add jQuery Mobile
-2. Add Google Maps or OpenLayers
+1. <del>Add jQuery Mobile</del>
+2. <del>Add Google Maps</del>
 3. Get a working mobile map thingy
 4. Detect current location
 5. Fetch XML from vegvesen.no
