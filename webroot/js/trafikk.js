@@ -19,6 +19,7 @@ var Trafikk = (function() {
         bindEvents()
         getLocation();
         map = new google.maps.Map(document.getElementById(id), myOptions);
+        $(window).trigger('resize');
         return this;
     });
         
@@ -57,6 +58,13 @@ var Trafikk = (function() {
         var self = this;
         $('body').bind('onGeoposition', function(event) {
             setCenter();
+        });
+        $(window).bind('resize orentationchange', function(event) {
+            var height = {};
+            height.screen = $.mobile.getScreenHeight();
+            height.header = $('#home div[data-role="header"]').outerHeight();
+            height.footer = $('#home div[data-role="footer"]').outerHeight();
+            $('#map_canvas').height(height.screen - height.header - height.footer);
         });
         return this;
     }

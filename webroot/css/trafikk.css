@@ -5,6 +5,9 @@
     Description:
         main stylesheet
 */
-#map_canvas {
-    min-height: 200px;
+html, body {
+    overflow: hidden;
+}
+.ui-content {
+    padding: 0;
 }
