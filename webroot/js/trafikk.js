@@ -23,7 +23,7 @@ var Trafikk = (function() {
         $(window).trigger('resize');
         return this;
     });
-        
+
     // functions
     var getLocation = function() {
         if (!user.position && navigator && navigator.geolocation) {
@@ -45,7 +45,7 @@ var Trafikk = (function() {
         }
         return this;
     }
-        
+
     // store the users location and trigger an update
     var setUserLocation = function(Geoposition) {
         var coords = Geoposition.coords
@@ -54,22 +54,22 @@ var Trafikk = (function() {
         $('body').trigger('onGeoposition');
         return this;
     }
-        
+
     var bindEvents = function() {
         var self = this;
         $('body').bind('onGeoposition', function(event) {
             setCenter();
         });
         $(window).bind('resize orentationchange', function(event) {
-             var height = {};
+            var height = {};
             height.screen = $.mobile.getScreenHeight();
             height.header = $('#home div[data-role="header"]').outerHeight();
             height.footer = $('#home div[data-role="footer"]').outerHeight();
-            $('#map_canvas').height(height.screen - height.header - height.footer);         
+            $('#map_canvas').height(height.screen - height.header - height.footer);
         });
         return this;
     }
-        
+
     // more controlled version of map.setCenter
     var setCenter = function(LatLng) {
         if (!LatLng && user.LatLng) {
@@ -80,6 +80,6 @@ var Trafikk = (function() {
     
     // list public properties that should be accessible outside here!
     return {
-        
+
     };
 })();
