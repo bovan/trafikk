@@ -1,8 +1,8 @@
 # Trafikk #
 
-Currently pre-alpha until todo-list below is complete
+Currently early alpha until todo-list below is complete
 
-A revisited version of my old, now broken, trafikk.org site. 
+A revisited version of my old, now half-broken, trafikk.org site. 
 
 ## Uses ##
 
