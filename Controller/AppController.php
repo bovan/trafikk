@@ -31,4 +31,20 @@ App::uses('Controller', 'Controller');
  * @package       app.Controller
  */
 class AppController extends Controller {
+    
+    public $site_name = 'Trafikk.org';
+    
+    /**
+     * A simple function for getting site title
+     * @param $page
+     * @return site_name + $page merged
+     */
+    protected function getSiteTitle($page = NULL) {
+        if ($page === NULL) {
+            return $this->site_name;
+        }
+        else {
+            return $this->site_name . ' - ' . $page;
+        }
+    }
 }
