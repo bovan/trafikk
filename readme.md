@@ -19,7 +19,7 @@ A revisited version of my old, now broken, trafikk.org site.
 
 1. <del>Add jQuery Mobile</del>
 2. <del>Add Google Maps</del>
-3. Add normalized CSS
+3. <del>Add normalized CSS</del>
 4. Get a working mobile map thingy
 5. Detect current location
 6. Fetch XML from vegvesen.no
