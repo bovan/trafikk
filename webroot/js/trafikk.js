@@ -13,12 +13,13 @@ var Trafikk = (function() {
         position: false,
         LatLng : false
     };
-    
+
     // constructor kinda!
     $(document).ready(function () {
         bindEvents()
         getLocation();
         map = new google.maps.Map(document.getElementById(id), myOptions);
+        // scale map by using the resize event
         $(window).trigger('resize');
         return this;
     });
@@ -60,11 +61,11 @@ var Trafikk = (function() {
             setCenter();
         });
         $(window).bind('resize orentationchange', function(event) {
-            var height = {};
+             var height = {};
             height.screen = $.mobile.getScreenHeight();
             height.header = $('#home div[data-role="header"]').outerHeight();
             height.footer = $('#home div[data-role="footer"]').outerHeight();
-            $('#map_canvas').height(height.screen - height.header - height.footer);
+            $('#map_canvas').height(height.screen - height.header - height.footer);         
         });
         return this;
     }
