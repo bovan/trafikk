@@ -5,7 +5,7 @@
 <?php endif; ?>
 
 <ul>
-<?php foreach ($messages as $message): ?>
+<?php foreach ($messages->message as $message): ?>
     <li><?php
         print $this->Html->tag('h3', $message->heading);
         print $this->Html->tag('span', $message->messageType);

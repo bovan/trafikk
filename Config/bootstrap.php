@@ -29,7 +29,7 @@ Cache::config('halfhour', array(
     'engine' => 'File', 
     'duration'=> '1800',
     'path' => CACHE,
-    'prefix' => 'cake_short_',
+    'prefix' => 'cake_halfhour_',
 ));
 
 /**
