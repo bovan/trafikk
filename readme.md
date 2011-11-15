@@ -22,8 +22,8 @@ A revisited version of my old, now half-broken, trafikk.org site.
 3. <del>Add normalized CSS</del>
 4. <del>Get a working mobile map thingy</del>
 5. <del>Detect current location</del>
-6. Fetch XML from vegvesen.no
-7. Cache data in Cake (db?)
+6. <del>Fetch XML from vegvesen.no</del>
+7. <del>Cache data in Cake (db?)</del>
 8. Create list-of-markers-near-your-position JSON on request
 9. Set up a second page to force manual update (for development)
 10. Set up functionality to draw markers from JSON map
