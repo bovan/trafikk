@@ -1,5 +1,7 @@
 <?php
+
 App::uses('AppController', 'Controller');
+
 /**
  * Messages Controller
  *
@@ -7,90 +9,61 @@ App::uses('AppController', 'Controller');
  */
 class MessagesController extends AppController {
 
+    /**
+     * index method
+     *
+     * @return void
+     */
+    public function index() {
+        $this->setTitle('Meldinger');
+        $this->Message->recursive = 0;
+        $this->set('messages', $this->paginate());
+    }
 
-/**
- * index method
- *
- * @return void
- */
-	public function index() {
-		$this->Message->recursive = 0;
-		$this->set('messages', $this->paginate());
-	}
+    /**
+     * view method
+     *
+     * @param string $id
+     * @return void
+     */
+    public function view($id = null) {
+        $this->Message->id = $id;
+        if (!$this->Message->exists()) {
+            throw new NotFoundException(__('Invalid message'));
+        }
+        $this->set('message', $this->Message->read(null, $id));
+    }
 
-/**
- * view method
- *
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
-		$this->Message->id = $id;
-		if (!$this->Message->exists()) {
-			throw new NotFoundException(__('Invalid message'));
-		}
-		$this->set('message', $this->Message->read(null, $id));
-	}
+    /**
+     * update method
+     * TODO: create cron job
+     */
+    public function update() {
+        
+        $this->setTitle('Updating');
+        
+        App::uses('Xml', 'Utility');
 
-/**
- * add method
- *
- * @return void
- */
-	public function add() {
-		if ($this->request->is('post')) {
-			$this->Message->create();
-			if ($this->Message->save($this->request->data)) {
-				$this->Session->setFlash(__('The message has been saved'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The message could not be saved. Please, try again.'));
-			}
-		}
-	}
+        // get XML
+        $url = 'http://www.vegvesen.no/trafikk/xml/search.xml?searchFocus.counties=2&searchFocus.counties=9&searchFocus.counties=6&searchFocus.counties=20&searchFocus.counties=4&searchFocus.counties=12&searchFocus.counties=15&searchFocus.counties=17&searchFocus.counties=18&searchFocus.counties=5&searchFocus.counties=3&searchFocus.counties=11&searchFocus.counties=14&searchFocus.counties=16&searchFocus.counties=8&searchFocus.counties=19&searchFocus.counties=10&searchFocus.counties=7&searchFocus.counties=1&searchFocus.messageType=17&searchFocus.messageType=19&searchFocus.messageType=20&searchFocus.messageType=18&searchFocus.messageType=22&searchFocus.messageType=23&searchFocus.sortOrder=0';
+        $xml = Xml::build($url);
 
-/**
- * edit method
- *
- * @param string $id
- * @return void
- */
-	public function edit($id = null) {
-		$this->Message->id = $id;
-		if (!$this->Message->exists()) {
-			throw new NotFoundException(__('Invalid message'));
-		}
-		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->Message->save($this->request->data)) {
-				$this->Session->setFlash(__('The message has been saved'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The message could not be saved. Please, try again.'));
-			}
-		} else {
-			$this->request->data = $this->Message->read(null, $id);
-		}
-	}
+        // XML = simpleXML object (may look odd, but it's a silly XML!)
+        $messages = $xml->{'result-array'}->result->messages;
+        
+        // if we got tons of messages, wipe the db
+        // todo: could probably replace this with truncate
+        if (count($messages->message) > 0) {
+            $this->Message->deleteAll(array(true => true));
+        }
 
-/**
- * delete method
- *
- * @param string $id
- * @return void
- */
-	public function delete($id = null) {
-		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
-		}
-		$this->Message->id = $id;
-		if (!$this->Message->exists()) {
-			throw new NotFoundException(__('Invalid message'));
-		}
-		if ($this->Message->delete()) {
-			$this->Session->setFlash(__('Message deleted'));
-			$this->redirect(array('action'=>'index'));
-		}
-		$this->Session->setFlash(__('Message was not deleted'));
-		$this->redirect(array('action' => 'index'));
-	}
+        // add messages
+        foreach ($messages->message as $message) {
+            $success = $this->Message->addMessage($message);
+            if (!success) {
+                // TODO: add warning or stuff here
+            }
+        }
+    }
+
 }

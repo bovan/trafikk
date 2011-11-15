@@ -39,12 +39,12 @@ class AppController extends Controller {
      * @param $page
      * @return site_name + $page merged
      */
-    protected function getSiteTitle($page = NULL) {
+    protected function setTitle($page = NULL) {
         if ($page === NULL) {
-            return $this->site_name;
+            $this->set('title', $this->site_name);
         }
         else {
-            return $this->site_name . ' - ' . $page;
+            $this->set('title', $this->site_name . ' - ' . $page);
         }
     }
 }

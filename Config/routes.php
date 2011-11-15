@@ -26,7 +26,9 @@
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
 	Router::connect('/', array('controller' => 'pages', 'action' => 'main'));
-        Router::connect('/xml', array('controller' => 'pages', 'action' => 'xml_test'));
+        Router::connect('/messages', array('controller' => 'messages', 'action' => 'index'));
+        // TODO: remove cron with real cron
+        Router::connect('/cron', array('controller' => 'messages', 'action' => 'update'));
 /**
  * Load all plugin routes.  See the CakePlugin documentation on
  * how to customize the loading of plugin routes.
