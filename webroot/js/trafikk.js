@@ -4,8 +4,7 @@ var Trafikk = (function () {
     ///////////////////
     // private vars
     ///////////////////
-    var latlng,
-        map,
+    var map,
         id = 'map_canvas',
         myOptions = {
             zoom: 4,
@@ -28,6 +27,46 @@ var Trafikk = (function () {
             user.LatLng = new google.maps.LatLng(coords.latitude, coords.longitude);
             $('body').trigger('onGeoposition');
             return this;
+        },
+        createMarker = function createMarker(lat, lon, title, message) {
+            // add marker
+            var i,
+                newLatLng = new google.maps.LatLng(lat, lon),
+                marker = new google.maps.Marker({
+                    position: newLatLng,
+                    map: map,
+                    title : title
+                }),
+                // add infowindow to marker
+                infowindow = new google.maps.InfoWindow({
+                    content: '<h3>' + title + '</h3>' + message,
+                    size: new google.maps.Size(200, 100)
+                });
+            google.maps.event.addListener(marker, 'click', function () {
+                for (i = 0; i < markers.length; i += 1) {
+                    markers[i].infowindow.close();
+                }
+                infowindow.open(map, marker);
+            });
+            // return the marker and infowindow 
+            return {
+                marker: marker,
+                infowindow : infowindow
+            };
+        },
+        getMessages = function getMessages() {
+            var url = 'messages/nearby/' + user.LatLng.Pa + '/' + user.LatLng.Qa;
+            $.getJSON(url, function (data) {
+                var i = 0;
+                for (i = 0; i < data.length; i += 1) {
+                    markers.push(createMarker(
+                        data[i].Message.latitude,
+                        data[i].Message.longitude,
+                        data[i].Message.heading,
+                        data[i].Message.ingress
+                    ));
+                }
+            });
         },
         getLocation = function getLocation() {
             if (!user.position && navigator && navigator.geolocation) {
@@ -68,50 +107,12 @@ var Trafikk = (function () {
             });
             return this;
         },
-        update = function update(){
-            $.getJSON('messages/update', function(data) {
+        update = function update() {
+            $.getJSON('messages/update', function (data) {
                 if (data.success === true) {
                     alert("update complete");
                 }
             });
-        },
-        createMarker = function createMarker(lat, lon, title,message) {
-            var newLatLng = new google.maps.LatLng(lat, lon);
-            var marker = new google.maps.Marker({
-                position: newLatLng,
-                map: map,
-                title : title
-            });
-            var infowindow = new google.maps.InfoWindow({
-                content: '<h3>'+title+'</h3>' + message,
-                size: new google.maps.Size(200,100)
-            });
-            google.maps.event.addListener(marker, 'click', function() {
-                for (var i = 0; i < markers.length; i += 1) {
-                    markers[i].infowindow.close();
-                }
-               infowindow.open(map,marker); 
-               console.log(infowindow);
-            });
-            marker.setMap(map);
-            return {
-                marker: marker,
-                infowindow : infowindow
-            };
-        },
-        getMessages = function getMessages() {
-            $.getJSON('messages/nearby/'+ user.LatLng.Pa + '/' + user.LatLng.Qa,
-                function(data) {
-                    for (var i = 0; i < data.length; i += 1) {
-                        var title = data[i].Message['heading'],
-                            lat   = data[i].Message['latitude'],
-                            lon   = data[i].Message['longitude'],
-                            msg   = data[i].Message['ingress'],
-                            marker = createMarker(lat, lon, title, msg);
-                            markers.push(marker);
-                            console.log(marker);
-                    }
-                });
         };
     //////////////////////
     // constructor kinda!
@@ -123,9 +124,9 @@ var Trafikk = (function () {
         // scale map by using the resize event
         $(window).trigger('resize');
         // TODO: remove this when cron is ready
-        $('#run_update').click(function(){
+        $('#run_update').click(function () {
             update();
-        })
+        });
         return this;
     });
     /////////////////////////

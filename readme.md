@@ -1,6 +1,7 @@
 # Trafikk #
 
-Currently early alpha until todo-list below is complete
+Currently early alpha until todo-list below is complete, once that
+is complete i will put this up and start testing.
 
 A revisited version of my old, now half-broken, trafikk.org site. 
 
