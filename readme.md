@@ -11,9 +11,10 @@ A revisited version of my old, now half-broken, trafikk.org site.
 * jQuery Mobile
 * Google Maps
 
-## Functionality ##
+## Goals ##
 
-* It doesn't crash
+* Allow a user to retrieve the traffic information nearby using location details from his/her mobile device.
+* Make the system somewhat reliable (several updates per hour, iphone/android compatible + firefox)
 
 ## TODO ##
 
