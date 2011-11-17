@@ -27,7 +27,7 @@ A revisited version of my old, now half-broken, trafikk.org site.
 7. <del>Cache data in Cake (db?)</del>
 8. <del>Create list-of-markers-near-your-position JSON on request</del>
 9. <del>Set up a second page to force manual update (for development)</del>
-10. Set up functionality to draw markers from JSON map
+10. <del>Set up functionality to draw markers from JSON map</del>
 11. Add a third page with optional filters
 12. Set up cronjob for cache
 13. Add a fourth page with predefined counties in Norway

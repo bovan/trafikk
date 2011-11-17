@@ -19,8 +19,8 @@ class Message extends AppModel {
          */
         public function addMessage ($message) {
             if (isset($message->coordinates->endPoint)) {
-                $endlat = $message->coordinates->endPoint->xCoord;
-                $endlon = $message->coordinates->endPoint->yCoord;
+                $endlon = $message->coordinates->endPoint->xCoord;
+                $endlat = $message->coordinates->endPoint->yCoord;
             } else {
                 $endlat = NULL;
                 $endlon = NULL;
@@ -41,8 +41,8 @@ class Message extends AppModel {
                     // TODO: parse validFrom
                     'validFrom' => $message->validFrom,
                     // TODO: do we have a validTo ?
-                    'latitude' => floatval($message->coordinates->startPoint->xCoord),
-                    'longitude' => floatval($message->coordinates->startPoint->yCoord),
+                    'longitude' => floatval($message->coordinates->startPoint->xCoord),
+                    'latitude' => floatval($message->coordinates->startPoint->yCoord),
                     'endlatitude' => floatval($endlat),
                     'endlongitude' => floatval($endlon),
                 )
@@ -68,7 +68,7 @@ class Message extends AppModel {
                     'Message.longitude BETWEEN ? AND ?' => array($longitude -1, $longitude +1)
                 )
             ));
-            
+
             // get distance from location
             foreach ($messages as $key => $message) {
                 $msglat = $message['Message']['latitude'];

@@ -9,13 +9,14 @@ var Trafikk = (function () {
         id = 'map_canvas',
         myOptions = {
             zoom: 4,
-            center: latlng,
+            center: new google.maps.LatLng(65.5, 17.5),
             mapTypeId: google.maps.MapTypeId.ROADMAP || "roadmap"
         },
         user = {
             position: false,
             LatLng : false
         },
+        markers = [],
         /////////////////
         // functions
         /////////////////
@@ -67,18 +68,50 @@ var Trafikk = (function () {
             });
             return this;
         },
-        getMessages = function getMessages() {
-            $.getJSON('messages/nearby/'+ user.LatLng.Qa + '/' + user.LatLng.Pa,
-                function(data) {
-                    console.log(data);
-                });
-        },
         update = function update(){
             $.getJSON('messages/update', function(data) {
                 if (data.success === true) {
                     alert("update complete");
                 }
             });
+        },
+        createMarker = function createMarker(lat, lon, title,message) {
+            var newLatLng = new google.maps.LatLng(lat, lon);
+            var marker = new google.maps.Marker({
+                position: newLatLng,
+                map: map,
+                title : title
+            });
+            var infowindow = new google.maps.InfoWindow({
+                content: '<h3>'+title+'</h3>' + message,
+                size: new google.maps.Size(200,100)
+            });
+            google.maps.event.addListener(marker, 'click', function() {
+                for (var i = 0; i < markers.length; i += 1) {
+                    markers[i].infowindow.close();
+                }
+               infowindow.open(map,marker); 
+               console.log(infowindow);
+            });
+            marker.setMap(map);
+            return {
+                marker: marker,
+                infowindow : infowindow
+            };
+        },
+        getMessages = function getMessages() {
+            $.getJSON('messages/nearby/'+ user.LatLng.Pa + '/' + user.LatLng.Qa,
+                function(data) {
+                    for (var i = 0; i < data.length; i += 1) {
+                        var title = data[i].Message['heading'],
+                            lat   = data[i].Message['latitude'],
+                            lon   = data[i].Message['longitude'],
+                            msg   = data[i].Message['ingress'],
+                            marker = createMarker(lat, lon, title, msg);
+                            markers.push(marker);
+                            console.log(marker);
+                    }
+                });
         };
     //////////////////////
     // constructor kinda!
@@ -86,7 +119,6 @@ var Trafikk = (function () {
     $(document).ready(function onReady() {
         bindEvents();
         getLocation();
-        myOptions.LatLng = new google.maps.LatLng(65.5, 17.5);
         map = new google.maps.Map(document.getElementById(id), myOptions);
         // scale map by using the resize event
         $(window).trigger('resize');
