@@ -25,7 +25,7 @@ A revisited version of my old, now half-broken, trafikk.org site.
 6. <del>Fetch XML from vegvesen.no</del>
 7. <del>Cache data in Cake (db?)</del>
 8. <del>Create list-of-markers-near-your-position JSON on request</del>
-9. Set up a second page to force manual update (for development)
+9. <del>Set up a second page to force manual update (for development)</del>
 10. Set up functionality to draw markers from JSON map
 11. Add a third page with optional filters
 12. Set up cronjob for cache

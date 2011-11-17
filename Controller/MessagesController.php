@@ -29,7 +29,7 @@ class MessagesController extends AppController {
         
         // render it as JSON
         RequestHandlerComponent::setContent('json');
-        $this->set('messages', $messages);
+        $this->set('json', $messages);
         $this->layout = 'ajax';
         $this->render('/Elements/json');
     }
@@ -72,12 +72,17 @@ class MessagesController extends AppController {
         }
 
         // add messages
+        $result = array('success' => true);
         foreach ($messages->message as $message) {
             $success = $this->Message->addMessage($message);
-            if (!success) {
+            if (!$success) {
+                $result['success'] = false;
                 // TODO: add warning or stuff here
             }
         }
+        $this->set('json', $result);
+        $this->layout = 'ajax';
+        $this->render('/Elements/json');
     }
 
 }

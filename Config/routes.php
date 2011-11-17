@@ -27,9 +27,9 @@
  */
 	Router::connect('/', array('controller' => 'pages', 'action' => 'main'));
         Router::connect('/messages', array('controller' => 'messages', 'action' => 'index'));
-        Router::connect('messages/nearby', array('controller' => 'messages', 'action' => 'nearby'));
+        Router::connect('/messages/nearby', array('controller' => 'messages', 'action' => 'nearby'));
         // TODO: remove cron with real cron
-        Router::connect('/cron', array('controller' => 'messages', 'action' => 'update'));
+        Router::connect('/messages/update', array('controller' => 'messages', 'action' => 'update'));
 /**
  * Load all plugin routes.  See the CakePlugin documentation on
  * how to customize the loading of plugin routes.

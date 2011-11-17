@@ -11,3 +11,6 @@ html, body {
 .ui-content {
     padding: 0;
 }
+.ui-footer {
+    text-align: center;
+}

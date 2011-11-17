@@ -46,8 +46,8 @@
 
 		</div>
 		<div data-role="footer" data-theme="a">
-			<h2>Work in progress</h2>
-		</div>
+                        <button id="run_update">Oppdater</button>
+                </div>
 	</div>
 	<?php echo $this->element('sql_dump'); ?>
     <?php

@@ -48,8 +48,8 @@ class Message extends AppModel {
                 )
             );
             
-            $this->Message->create();
-            if (!$this->Message->save($data)) {
+            $this->create();
+            if (!$this->save($data)) {
                 return false;
             }
             return true;

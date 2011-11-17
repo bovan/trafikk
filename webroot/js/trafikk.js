@@ -72,6 +72,13 @@ var Trafikk = (function () {
                 function(data) {
                     console.log(data);
                 });
+        },
+        update = function update(){
+            $.getJSON('messages/update', function(data) {
+                if (data.success === true) {
+                    alert("update complete");
+                }
+            });
         };
     //////////////////////
     // constructor kinda!
@@ -83,12 +90,17 @@ var Trafikk = (function () {
         map = new google.maps.Map(document.getElementById(id), myOptions);
         // scale map by using the resize event
         $(window).trigger('resize');
+        // TODO: remove this when cron is ready
+        $('#run_update').click(function(){
+            update();
+        })
         return this;
     });
     /////////////////////////
     // public properties
     /////////////////////////
     return {
-
+        // TODO: remove this when cron is ready
+        update : update
     };
 }());
