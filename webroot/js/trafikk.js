@@ -33,6 +33,7 @@ var Trafikk = (function () {
                 navigator.geolocation.getCurrentPosition(
                     function success(Geopos) {
                         setUserLocation(Geopos);
+                        getMessages();
                         return this;
                     },
                     function error() {
@@ -65,6 +66,12 @@ var Trafikk = (function () {
                 $('#map_canvas').height(height.screen - height.header - height.footer);
             });
             return this;
+        },
+        getMessages = function getMessages() {
+            $.getJSON('messages/nearby/'+ user.LatLng.Qa + '/' + user.LatLng.Pa,
+                function(data) {
+                    console.log(data);
+                });
         };
     //////////////////////
     // constructor kinda!

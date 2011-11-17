@@ -22,8 +22,8 @@ class Message extends AppModel {
                 $endlat = $message->coordinates->endPoint->xCoord;
                 $endlon = $message->coordinates->endPoint->yCoord;
             } else {
-                $endlat = null;
-                $endlon = null;
+                $endlat = NULL;
+                $endlon = NULL;
             }
 
             // Todo: iterate over all values and validate them
@@ -41,10 +41,10 @@ class Message extends AppModel {
                     // TODO: parse validFrom
                     'validFrom' => $message->validFrom,
                     // TODO: do we have a validTo ?
-                    'latitude' => $message->coordinates->startPoint->xCoord,
-                    'longitude' => $message->coordinates->startPoint->yCoord,
-                    'endlatitude' => $endlat,
-                    'endlongitude' => $endlon,
+                    'latitude' => floatval($message->coordinates->startPoint->xCoord),
+                    'longitude' => floatval($message->coordinates->startPoint->yCoord),
+                    'endlatitude' => floatval($endlat),
+                    'endlongitude' => floatval($endlon),
                 )
             );
             
@@ -55,7 +55,39 @@ class Message extends AppModel {
             return true;
         }
         
-        public function findNearby($lat, $long) {
+        public function findNearby($lat, $lon) {
+            $latitude = floatval($lat);
+            $longitude = floatval($lon);
+            if (!is_float($longitude) || !is_float($latitude)) {
+                return NULL;
+            }
             
+            $messages = $this->find('all', array(
+                'conditions' => array(
+                    'Message.latitude BETWEEN ? AND ?' => array($latitude - 1, $latitude +1),
+                    'Message.longitude BETWEEN ? AND ?' => array($longitude -1, $longitude +1)
+                )
+            ));
+            
+            // get distance from location
+            foreach ($messages as $key => $message) {
+                $msglat = $message['Message']['latitude'];
+                $msglon = $message['Message']['longitude'];
+                $messages[$key]['Message']['distance'] = $this->getDistance($latitude, $longitude, $msglat, $msglon);
+            }
+            return $messages;
+        }
+        
+        /**
+         * Calculates distance in km between one set of coords and another
+         */
+        private function getDistance($lat, $lon, $msglat, $msglon) {
+            $dLon = $msglon - $lon;
+            $diff = sin(deg2rad($lat)) * sin(deg2rad($msglat)) +
+                cos(deg2rad($lat)) * cos(deg2rad($msglat)) * cos(deg2rad($dLon));
+            $diff = acos($diff);
+            $diff = rad2deg($diff);
+            $km = $diff * 60 * 1.8531596;
+            return intval($km);
         }
 }

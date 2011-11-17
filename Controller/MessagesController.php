@@ -9,6 +9,9 @@ App::uses('AppController', 'Controller');
  */
 class MessagesController extends AppController {
 
+    public $components = array('RequestHandler');
+    
+    
     /**
      * index method
      *
@@ -18,6 +21,17 @@ class MessagesController extends AppController {
         $this->setTitle('Meldinger');
         $this->Message->recursive = 0;
         $this->set('messages', $this->paginate());
+    }
+    
+    public function nearby($lat = null, $lon = null) {
+        // try to get any nearby messages
+        $messages = $this->Message->findNearby($lat, $lon);
+        
+        // render it as JSON
+        RequestHandlerComponent::setContent('json');
+        $this->set('messages', $messages);
+        $this->layout = 'ajax';
+        $this->render('/Elements/json');
     }
 
     /**

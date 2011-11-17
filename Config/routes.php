@@ -27,6 +27,7 @@
  */
 	Router::connect('/', array('controller' => 'pages', 'action' => 'main'));
         Router::connect('/messages', array('controller' => 'messages', 'action' => 'index'));
+        Router::connect('messages/nearby', array('controller' => 'messages', 'action' => 'nearby'));
         // TODO: remove cron with real cron
         Router::connect('/cron', array('controller' => 'messages', 'action' => 'update'));
 /**
