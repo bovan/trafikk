@@ -16,10 +16,11 @@ var Trafikk = (function () {
             LatLng : false
         },
         markers = [],
+
         /////////////////
         // functions
         /////////////////
-        //
+
         // store the users location and trigger an update
         setUserLocation = function setUserLocation(Geoposition) {
             var coords = Geoposition.coords;
@@ -28,6 +29,7 @@ var Trafikk = (function () {
             $('body').trigger('onGeoposition');
             return this;
         },
+
         createMarker = function createMarker(lat, lon, title, message) {
             // add marker
             var i,
@@ -54,15 +56,14 @@ var Trafikk = (function () {
                 infowindow : infowindow
             };
         },
+
         getMessages = function getMessages() {
             $.mobile.loadingMessage = "Henter trafikkmeldinger";
             $.mobile.showPageLoadingMsg();
             var url = 'messages/nearby/' + user.LatLng.Pa + '/' + user.LatLng.Qa;
-            console.log("checking if we have an extended search going!");
-            console.log(sessionStorage.getItem('extendedSearch'));
             if (sessionStorage && sessionStorage.getItem('extendedSearch') === "true") {
                 url += '/extended';
-            }   
+            }
             $.getJSON(url, function (data) {
                 var i = 0;
                 // clear all markers
@@ -87,6 +88,7 @@ var Trafikk = (function () {
                 }
             });
         },
+
         getLocation = function getLocation() {
             if (!user.position && navigator && navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
@@ -106,6 +108,7 @@ var Trafikk = (function () {
             }
             return this;
         },
+
         // more controlled version of map.setCenter
         setCenter = function setCenter(LatLng) {
             if (!LatLng && user.LatLng) {
@@ -113,6 +116,7 @@ var Trafikk = (function () {
             }
             // probably will add more stuff here
         },
+
         bindEvents = function bindEvents() {
             $('body').bind('onGeoposition', function () {
                 setCenter();
@@ -126,6 +130,7 @@ var Trafikk = (function () {
             });
             return this;
         },
+
         update = function update() {
             $.getJSON('messages/update', function (data) {
                 if (data.success === true) {
@@ -133,6 +138,7 @@ var Trafikk = (function () {
                 }
             });
         },
+
         toggleRange = function toggleRange(value) {
             var self = this;
             if (sessionStorage) {
@@ -141,7 +147,7 @@ var Trafikk = (function () {
                 } else {
                     sessionStorage.setItem('extendedSearch', 'true');
                 }
-            
+
                 // reload data when returning to map
                 $(document).one('pagebeforechange', self.getMessages);
             } else {
@@ -149,6 +155,7 @@ var Trafikk = (function () {
             }
             return this;
         };
+
     //////////////////////
     // constructor kinda!
     //////////////////////
@@ -168,6 +175,7 @@ var Trafikk = (function () {
         $.getScript('js/trafikk.settings.js');
         return this;
     });
+
     /////////////////////////
     // public properties
     /////////////////////////
@@ -176,9 +184,11 @@ var Trafikk = (function () {
         // public vars
         //////////////
         markers : markers,
+
         ///////////////////
         // public functions
         ///////////////////
+
         // TODO: remove update when cron is ready
         update : update,
         getMessages : getMessages,
