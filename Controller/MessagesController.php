@@ -23,9 +23,9 @@ class MessagesController extends AppController {
         $this->set('messages', $this->paginate());
     }
     
-    public function nearby($lat = null, $lon = null) {
+    public function nearby($lat = null, $lon = null, $extended = false) {
         // try to get any nearby messages
-        $messages = $this->Message->findNearby($lat, $lon);
+        $messages = $this->Message->findNearby($lat, $lon, $extended);
         
         // render it as JSON
         RequestHandlerComponent::setContent('json');

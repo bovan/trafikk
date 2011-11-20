@@ -55,9 +55,22 @@ var Trafikk = (function () {
             };
         },
         getMessages = function getMessages() {
+            $.mobile.loadingMessage = "Henter trafikkmeldinger";
+            $.mobile.showPageLoadingMsg();
             var url = 'messages/nearby/' + user.LatLng.Pa + '/' + user.LatLng.Qa;
+            console.log("checking if we have an extended search going!");
+            console.log(sessionStorage.getItem('extendedSearch'));
+            if (sessionStorage && sessionStorage.getItem('extendedSearch') === "true") {
+                url += '/extended';
+            }   
             $.getJSON(url, function (data) {
                 var i = 0;
+                // clear all markers
+                for (i = 0; i < markers.length; i += 1) {
+                    markers[i].marker.setMap(null);
+                }
+                markers.length = 0;
+                // insert new ones
                 for (i = 0; i < data.length; i += 1) {
                     markers.push(createMarker(
                         data[i].Message.latitude,
@@ -65,6 +78,12 @@ var Trafikk = (function () {
                         data[i].Message.heading,
                         data[i].Message.ingress
                     ));
+                }
+                $.mobile.hidePageLoadingMsg();
+                // show an error message if there's no messages
+                if (markers.length === 0) {
+                    $('#dialog .msg').text('Fant ingen meldinger!');
+                    $.mobile.changePage('#dialog');
                 }
             });
         },
@@ -113,11 +132,29 @@ var Trafikk = (function () {
                     alert("update complete");
                 }
             });
+        },
+        toggleRange = function toggleRange(value) {
+            var self = this;
+            if (sessionStorage) {
+                if (value === "off") {
+                    sessionStorage.setItem('extendedSearch', 'false');
+                } else {
+                    sessionStorage.setItem('extendedSearch', 'true');
+                }
+            
+                // reload data when returning to map
+                $(document).one('pagebeforechange', self.getMessages);
+            } else {
+                alert("Your browser doesn't support sessionStorage");
+            }
+            return this;
         };
     //////////////////////
     // constructor kinda!
     //////////////////////
-    $(document).ready(function onReady() {
+    $(document).one('ready', function onReady() {
+        // go to home initially
+        window.location.replace(window.location.href.split("#")[0] + "#home");
         bindEvents();
         getLocation();
         map = new google.maps.Map(document.getElementById(id), myOptions);
@@ -127,13 +164,24 @@ var Trafikk = (function () {
         $('#run_update').click(function () {
             update();
         });
+        // load off-page scripts
+        $.getScript('js/trafikk.settings.js');
         return this;
     });
     /////////////////////////
     // public properties
     /////////////////////////
     return {
-        // TODO: remove this when cron is ready
-        update : update
+        //////////////
+        // public vars
+        //////////////
+        markers : markers,
+        ///////////////////
+        // public functions
+        ///////////////////
+        // TODO: remove update when cron is ready
+        update : update,
+        getMessages : getMessages,
+        toggleRange : toggleRange
     };
 }());

@@ -45,10 +45,37 @@
 			<?php echo $content_for_layout; ?>
 
 		</div>
-		<div data-role="footer" data-theme="a">
-                        <button id="run_update">Oppdater</button>
+		<div data-role="footer" data-theme="a" data-position="fixed">
+                    <a href="#settings" data-prefetch>Innstillinger</a>
+                    <button id="run_update">Oppdater</button>
                 </div>
 	</div>
+    <div id="settings" data-role="page">
+        <div data-role="content">
+            <p>Innholdet er i utgangspunktet begrenset i avstand for å sikre
+                optimal ytelse. Hvis du har en kraftig mobil/nettbrett kan du 
+                utvide avstanden for å se flere trafikkmeldinger.</p>
+            <div data-role="fieldcontain">
+                <label for="flip-range">Utvid avstand</label>
+                <select name="slider" id="flip-range" data-role="slider" data-theme="a">
+                    <option value="off">Av</option>
+                    <option value="on">På</option>
+                </select> 
+            </div>
+        </div>
+        <div data-role="footer" data-theme="a" data-position="fixed">
+            <a href="#home" data-rel="back">Tilbake</a>
+        </div>
+    </div>
+    <div id="dialog" data-role="dialog" data-rel="dialog" data-transition="pop" data-theme="c">
+        <div data-role="header" data-theme="d">
+            <h1>Dialog</h1>
+        </div>
+        <div data-role="content">
+            <p class="msg"></p>
+            <a href="#home" data-transition="pop">Tilbake</a>
+        </div>
+    </div>
 	<?php echo $this->element('sql_dump'); ?>
     <?php
         echo $this->Html->script('/libs/jquery-1.7.min.js'); 

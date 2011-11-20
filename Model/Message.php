@@ -55,17 +55,19 @@ class Message extends AppModel {
             return true;
         }
         
-        public function findNearby($lat, $lon) {
+        public function findNearby($lat, $lon, $extended) {
             $latitude = floatval($lat);
             $longitude = floatval($lon);
             if (!is_float($longitude) || !is_float($latitude)) {
                 return NULL;
             }
             
+            // if extended search, use higher search range
+            $range = ($extended) ? 3 : 1;
             $messages = $this->find('all', array(
                 'conditions' => array(
-                    'Message.latitude BETWEEN ? AND ?' => array($latitude - 1, $latitude +1),
-                    'Message.longitude BETWEEN ? AND ?' => array($longitude -1, $longitude +1)
+                    'Message.latitude BETWEEN ? AND ?' => array($latitude - $range, $latitude + $range),
+                    'Message.longitude BETWEEN ? AND ?' => array($longitude - $range, $longitude + $range)
                 )
             ));
 

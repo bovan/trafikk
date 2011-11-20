@@ -19,21 +19,24 @@ A revisited version of my old, now half-broken, trafikk.org site.
 
 ## TODO ##
 
-1. <del>Add jQuery Mobile</del>
-2. <del>Add Google Maps</del>
-3. <del>Add normalized CSS</del>
-4. <del>Get a working mobile map thingy</del>
-5. <del>Detect current location</del>
-6. <del>Fetch XML from vegvesen.no</del>
-7. <del>Cache data in Cake (db?)</del>
-8. <del>Create list-of-markers-near-your-position JSON on request</del>
-9. <del>Set up a second page to force manual update (for development)</del>
+01. <del>Add jQuery Mobile</del>
+02. <del>Add Google Maps</del>
+03. <del>Add normalized CSS</del>
+04. <del>Get a working mobile map thingy</del>
+05. <del>Detect current location</del>
+06. <del>Fetch XML from vegvesen.no</del>
+07. <del>Cache data in Cake (db?)</del>
+08. <del>Create list-of-markers-near-your-position JSON on request</del>
+09. <del>Set up a second page to force manual update (for development)</del>
 10. <del>Set up functionality to draw markers from JSON map</del>
-11. Add a third page with optional filters
-12. Set up cronjob for cache
-13. Add a fourth page with predefined counties in Norway
-14. Remove second page
-15. Add more stuff to do
+11. <del>Add a third page with optional filters</del>
+12. Make map auto-zoom to bounds (make it possible to disable it in settings)
+13. Allow using localStorage instead of sessionStorage in settings
+14. Set up cronjob for cache
+15. Add a fourth page with predefined counties in Norway
+16. Remove second page
+17. Add a "list nearby messages by distance" page
+18. Add more stuff to do
 
 ## License ##
 
