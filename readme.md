@@ -36,7 +36,9 @@ A revisited version of my old, now half-broken, trafikk.org site.
 15. Add a fourth page with predefined counties in Norway
 16. <del>Remove second page</del>
 17. Add a "list nearby messages by distance" page
-18. Add more stuff to do
+18. Enable browser caching of js/css files
+19. gzip content
+20. ++
 
 ## License ##
 
