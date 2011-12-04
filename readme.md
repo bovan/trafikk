@@ -37,8 +37,9 @@ A revisited version of my old, now half-broken, trafikk.org site.
 16. <del>Remove second page</del>
 17. Add a "list nearby messages by distance" page
 18. Enable browser caching of js/css files
-19. gzip content
-20. ++
+19. Try to gzip static content or use CDN
+20. Strip CSS from jquery.mobile if possible
+21. ++
 
 ## License ##
 
