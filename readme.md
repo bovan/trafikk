@@ -30,7 +30,7 @@ look at it for whatever reason.
 09. <del>Set up a second page to force manual update (for development)</del>
 10. <del>Set up functionality to draw markers from JSON map</del>
 11. <del>Add a third page with optional filters</del>
-12. Make map auto-zoom to bounds (make it possible to disable it in settings)
+12. <del>Make map auto-zoom to bounds </del>(make it possible to disable it in settings)
 13. Allow using localStorage instead of sessionStorage in settings
 14. <del>Set up cronjob for cache</del>
 15. Add a fourth page with predefined counties in Norway
