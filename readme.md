@@ -54,12 +54,13 @@ These items will be implemented as soon as possible
 * Add a "list nearby messages by distance" page
 * Add an Info page explaining wtf is going on
 * Need a fallback solution if user doesn't allow location sharing
+* Inform the user if the data is old
 
 ### And Then ###
 
 Then at the end we can add some low priority items
 
-* Add manual refresh icon (but only show a message, w/possibly a timer if an update isn't available yet) (ok bad idea! but come up with something from the realm of usability!)
+* Add manual refresh icon (but only show a message, w/possibly a timer if an update isn't available yet) (ok bad idea! but come up with something from the realm of usability!) update countdown which turns into a refresh icon?
 * Try to gzip static content or use CDN (possibly a combination with libs on CDN)
 * UI feedback : User not in Norway
 * UI feedback : Waiting for location, possible timeout
