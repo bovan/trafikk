@@ -5,16 +5,21 @@ This project is currently online at http://www.trafikk.org
 It is not intended for others to install, but feel free to use bits of code or 
 look at it for whatever reason.
 
+Due to the data being from Norway only, it will only work if your browser
+pretends to be in Norway (or actually is!).
+
 ## Uses ##
 
 * CakePHP 2.0
-* jQuery
-* jQuery Mobile
-* Google Maps
+* jQuery 1.7.1
+* jQuery Mobile 1.0
+* Google Maps 3
 
 ## Goals ##
 
 * Allow a user to retrieve the traffic information nearby using location details from his/her mobile device.
+* Present this information in a simple, low effort UI.
+* Optimize it for mobile usage.
 * Make the system somewhat reliable (several updates per hour, iphone/android compatible + firefox)
 
 ## TODO ##
