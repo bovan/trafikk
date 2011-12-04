@@ -45,7 +45,10 @@ pretends to be in Norway (or actually is!).
 19. Try to gzip static content or use CDN
 20. Strip CSS from jquery.mobile if possible
 21. Add "Your position" marker
-??. ++more coming
+22. Add manual refresh icon (but only show a message, w/possibly a timer if an update isn't
+available yet) (ok bad idea! but come up with something from the realm of usability!)
+
+    ++more coming
 
 ## License ##
 
