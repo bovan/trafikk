@@ -81,7 +81,7 @@
     </div>
 	<?php echo $this->element('sql_dump'); ?>
     <?php
-        echo $this->Html->script('/libs/jquery-1.7.min.js'); 
+        echo $this->Html->script('/libs/jquery-1.7.1.min.js'); 
         echo $this->Html->script('/libs/jquery.mobile-1.0/jquery.mobile-1.0.min.js'); 
         echo $this->Html->script('http://maps.googleapis.com/maps/api/js?sensor=true'); 
         echo $this->Html->script('trafikk');
