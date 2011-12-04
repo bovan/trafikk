@@ -24,31 +24,49 @@ pretends to be in Norway (or actually is!).
 
 ## TODO ##
 
-01. <del>Add jQuery Mobile</del>
-02. <del>Add Google Maps</del>
-03. <del>Add normalized CSS</del>
-04. <del>Get a working mobile map thingy</del>
-05. <del>Detect current location</del>
-06. <del>Fetch XML from vegvesen.no</del>
-07. <del>Cache data in Cake (db?)</del>
-08. <del>Create list-of-markers-near-your-position JSON on request</del>
-09. <del>Set up a second page to force manual update (for development)</del>
-10. <del>Set up functionality to draw markers from JSON map</del>
-11. <del>Add a third page with optional filters</del>
-12. <del>Make map auto-zoom to bounds </del>(make it possible to disable it in settings)
-13. Allow using localStorage instead of sessionStorage in settings
-14. <del>Set up cronjob for cache</del>
-15. Add a fourth page with predefined counties in Norway
-16. <del>Remove second page</del>
-17. Add a "list nearby messages by distance" page
-18. Enable browser caching of js/css files
-19. Try to gzip static content or use CDN
-20. Strip CSS from jquery.mobile if possible
-21. Add "Your position" marker
-22. Add manual refresh icon (but only show a message, w/possibly a timer if an update isn't
-available yet) (ok bad idea! but come up with something from the realm of usability!)
+The TODO-list is updated as I go...
 
-    ++more coming
+### Done ###
+
+These are implemented (but not necessarily tried & tested yet)
+
+* <del>Add jQuery Mobile</del>
+* <del>Add Google Maps</del>
+* <del>Add normalized CSS</del>
+* <del>Get a working mobile map thingy</del>
+* <del>Detect current location</del>
+* <del>Fetch XML from vegvesen.no</del>
+* <del>Cache data in Cake (db?)</del>
+* <del>Create list-of-markers-near-your-position JSON on request</del>
+* <del>Set up a second page to force manual update (for development)</del>
+* <del>Set up functionality to draw markers from JSON map</del>
+* <del>Add a third page with optional filters</del>
+* <del>Make map auto-zoom to bounds </del>(make it possible to disable it in settings)
+* <del>Set up cronjob for cache</del>
+* <del>Remove second page</del>
+
+### Next ###
+
+These items will be implemented as soon as possible
+
+* Add "Your position" marker
+* Add a fourth page with predefined counties in Norway
+* Add a "list nearby messages by distance" page
+* Add an Info page explaining wtf is going on
+* Need a fallback solution if user doesn't allow location sharing
+
+### And Then ###
+
+Then at the end we can add some low priority items
+
+* Add manual refresh icon (but only show a message, w/possibly a timer if an update isn't available yet) (ok bad idea! but come up with something from the realm of usability!)
+* Try to gzip static content or use CDN (possibly a combination with libs on CDN)
+* UI feedback : User not in Norway
+* UI feedback : Waiting for location, possible timeout
+* UI feedback : No messages found, show goto counties button.
+* Strip CSS from jquery.mobile if possible
+* Allow using localStorage instead of sessionStorage in settings
+* Enable browser caching of js/css files (partially done, completing later in the development process)
 
 ## License ##
 
