@@ -1,9 +1,9 @@
 # Trafikk #
 
-Currently early alpha until todo-list below is complete, once that
-is complete i will put this up and start testing.
+This project is currently online at http://www.trafikk.org
 
-A revisited version of my old, now half-broken, trafikk.org site. 
+It is not intended for others to install, but feel free to use bits of code or 
+look at it for whatever reason.
 
 ## Uses ##
 
