@@ -33,7 +33,7 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
     
     public $site_name = 'Trafikk.org';
-    
+
     /**
      * A simple function for getting site title
      * @param $page

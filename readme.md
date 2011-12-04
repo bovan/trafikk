@@ -32,9 +32,9 @@ A revisited version of my old, now half-broken, trafikk.org site.
 11. <del>Add a third page with optional filters</del>
 12. Make map auto-zoom to bounds (make it possible to disable it in settings)
 13. Allow using localStorage instead of sessionStorage in settings
-14. Set up cronjob for cache
+14. <del>Set up cronjob for cache</del>
 15. Add a fourth page with predefined counties in Norway
-16. Remove second page
+16. <del>Remove second page</del>
 17. Add a "list nearby messages by distance" page
 18. Add more stuff to do
 

@@ -37,6 +37,7 @@
 	<div id="home" data-role="page">
 		<div data-role="header">
 			<h1><?php echo $title ?></h1>
+                        <p class="notice red">Beta</p>
 		</div>
 		<div data-role="content">
 
@@ -47,7 +48,7 @@
 		</div>
 		<div data-role="footer" data-theme="a" data-position="fixed">
                     <a href="#settings" data-prefetch>Innstillinger</a>
-                    <button id="run_update">Oppdater</button>
+                    <!-- <button id="run_update">Oppdater</button> -->
                 </div>
 	</div>
     <div id="settings" data-role="page">
