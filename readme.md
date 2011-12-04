@@ -39,7 +39,8 @@ A revisited version of my old, now half-broken, trafikk.org site.
 18. Enable browser caching of js/css files
 19. Try to gzip static content or use CDN
 20. Strip CSS from jquery.mobile if possible
-21. ++
+21. Add "Your position" marker
+??. ++more coming
 
 ## License ##
 
