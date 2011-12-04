@@ -12,7 +12,6 @@ class Message extends AppModel {
  */
 	public $displayField = 'heading';
         
-        
         /**
          * Adds a message
          * @param type $message 
@@ -120,6 +119,12 @@ class Message extends AppModel {
                     // TODO: add warning or stuff here
                 }
             }
+        
+            // Log the result of the update
+            App::import('Controller', 'Updates');
+            $Updates = new UpdatesController;
+            $Updates->log($result['success']);
+            
             return $result;
         }
 }
