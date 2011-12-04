@@ -57,7 +57,7 @@ class Message extends AppModel {
         }
         
         /**
-         * font any items nearby a given latitude and longitude
+         * find any items nearby a given latitude and longitude
          * @param string $lat
          * @param string $lon
          * @param boolean $extended
