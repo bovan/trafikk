@@ -17,10 +17,12 @@ class Message extends AppModel {
          * @param type $message 
          */
         public function addMessage ($message) {
+            // not all messages have end coords
             if (isset($message->coordinates->endPoint)) {
                 $endlon = $message->coordinates->endPoint->xCoord;
                 $endlat = $message->coordinates->endPoint->yCoord;
             } else {
+                // if message doesnt have end coords, set them to NULL
                 $endlat = NULL;
                 $endlon = NULL;
             }
@@ -46,7 +48,7 @@ class Message extends AppModel {
                     'endlongitude' => floatval($endlon),
                 )
             );
-            
+            // save this item to database as a Message
             $this->create();
             if (!$this->save($data)) {
                 return false;
@@ -54,6 +56,13 @@ class Message extends AppModel {
             return true;
         }
         
+        /**
+         * font any items nearby a given latitude and longitude
+         * @param string $lat
+         * @param string $lon
+         * @param boolean $extended
+         * @return array 
+         */
         public function findNearby($lat, $lon, $extended) {
             $latitude = floatval($lat);
             $longitude = floatval($lon);
@@ -105,7 +114,7 @@ class Message extends AppModel {
             $messages = $xml->{'result-array'}->result->messages;
 
             // if we got tons of messages, wipe the db
-            // todo: could probably replace this with truncate
+            // todo: could probably replace this with truncate and get auto_increment zeroed out as well
             if (count($messages->message) > 0) {
                 $this->deleteAll(array(true => true));
             }
@@ -115,12 +124,13 @@ class Message extends AppModel {
             foreach ($messages->message as $message) {
                 $success = $this->addMessage($message);
                 if (!$success) {
+                    // if one message fails then we dont have success
                     $result['success'] = false;
                     // TODO: add warning or stuff here
                 }
             }
         
-            // Log the result of the update
+            // Log the result of the update using the UpdatesController
             App::import('Controller', 'Updates');
             $Updates = new UpdatesController;
             $Updates->log($result['success']);
