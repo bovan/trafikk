@@ -25,7 +25,9 @@
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
-                
+         ?>
+                <meta name="viewport" content="width=device-width, initial-scale=1"> 
+         <?php
                 echo $this->Html->css('normalize');
                 echo $this->Html->css('/libs/jquery.mobile-1.0/jquery.mobile-1.0.min.css');
                 echo $this->Html->css('trafikk');
