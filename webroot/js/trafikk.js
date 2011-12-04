@@ -5,6 +5,7 @@ var Trafikk = (function () {
     // private vars
     ///////////////////
     var map,
+        latlngbounds,
         id = 'map_canvas',
         myOptions = {
             zoom: 4,
@@ -65,21 +66,28 @@ var Trafikk = (function () {
                 url += '/extended';
             }
             $.getJSON(url, function (data) {
-                var i = 0;
+                var i = 0,
+                    newMarker;
                 // clear all markers
                 for (i = 0; i < markers.length; i += 1) {
                     markers[i].marker.setMap(null);
                 }
                 markers.length = 0;
                 // insert new ones
+                latlngbounds = new google.maps.LatLngBounds();
                 for (i = 0; i < data.length; i += 1) {
-                    markers.push(createMarker(
+                    newMarker = createMarker(
                         data[i].Message.latitude,
                         data[i].Message.longitude,
                         data[i].Message.heading,
                         data[i].Message.ingress
-                    ));
+                    );
+                    markers.push(newMarker);
+                    //console.log(newMarker.marker.position);
+                    latlngbounds.extend(newMarker.marker.position);
                 }
+                map.setCenter(latlngbounds.getCenter());
+                map.fitBounds(latlngbounds);
                 $.mobile.hidePageLoadingMsg();
                 // show an error message if there's no messages
                 if (markers.length === 0) {
