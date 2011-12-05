@@ -50,7 +50,6 @@ class MessagesController extends AppController {
 
     /**
      * update method
-     * TODO: create cron job
      */
     public function update() {
         

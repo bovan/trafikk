@@ -44,17 +44,19 @@ These are implemented (but not necessarily tried & tested yet)
 * <del>Make map auto-zoom to bounds </del>(make it possible to disable it in settings)
 * <del>Set up cronjob for cache</del>
 * <del>Remove second page</del>
+* <del>Add "Your position" marker</del>
+* <del>On load, zoom in closer based on document's width</del>
 
 ### Next ###
 
 These items will be implemented as soon as possible
 
-* Add "Your position" marker
 * Add a fourth page with predefined counties in Norway
 * Add a "list nearby messages by distance" page
 * Add an Info page explaining wtf is going on
 * Need a fallback solution if user doesn't allow location sharing
 * Inform the user if the data is old
+* On android (my android) in landscape mode, the zoom buttons are behind the UI
 
 ### And Then ###
 

@@ -14,7 +14,8 @@ var Trafikk = (function () {
         },
         user = {
             position: false,
-            LatLng : false
+            LatLng : false,
+            marker : null
         },
         markers = [],
 
@@ -24,9 +25,23 @@ var Trafikk = (function () {
 
         // store the users location and trigger an update
         setUserLocation = function setUserLocation(Geoposition) {
-            var coords = Geoposition.coords;
+            // remove any marker before placing a new
+            if (user.marker && user.marker.setMap) {
+                user.marker.setMap(null);
+            }
+            var coords = Geoposition.coords,
+                markerImage = new google.maps.MarkerImage('img/map-dot.png',
+                    new google.maps.Size(16,16),
+                    new google.maps.Point(0,0),
+                    new google.maps.Point(8,8));
             user.position = Geoposition;
             user.LatLng = new google.maps.LatLng(coords.latitude, coords.longitude);
+            user.marker = new google.maps.Marker({
+                position: user.LatLng,
+                map: map,
+                icon: markerImage,
+                title: "Din posisjon"
+            });
             $('body').trigger('onGeoposition');
             return this;
         },
@@ -83,11 +98,11 @@ var Trafikk = (function () {
                         data[i].Message.ingress
                     );
                     markers.push(newMarker);
-                    //console.log(newMarker.marker.position);
                     latlngbounds.extend(newMarker.marker.position);
                 }
-                map.setCenter(latlngbounds.getCenter());
-                map.fitBounds(latlngbounds);
+                // map.fitBounds(latlngbounds); // bugs initialZoom
+                map.panTo(user.LatLng);
+                initialZoom();
                 $.mobile.hidePageLoadingMsg();
                 // show an error message if there's no messages
                 if (markers.length === 0) {
@@ -121,6 +136,7 @@ var Trafikk = (function () {
         setCenter = function setCenter(LatLng) {
             if (!LatLng && user.LatLng) {
                 map.setCenter(user.LatLng);
+                map.panTo(user.LatLng);
             }
             // probably will add more stuff here
         },
@@ -135,6 +151,9 @@ var Trafikk = (function () {
                 height.header = $('#home div[data-role="header"]').outerHeight();
                 height.footer = $('#home div[data-role="footer"]').outerHeight();
                 $('#map_canvas').height(height.screen - height.header - height.footer);
+                if (user.LatLng) {
+                    map.panTo(user.LatLng);
+                }
             });
             return this;
         },
@@ -162,6 +181,24 @@ var Trafikk = (function () {
                 alert("Your browser doesn't support sessionStorage");
             }
             return this;
+        },
+
+        initialZoom = function initialZoom() {
+            var h = $(document).height(),
+                w = $(document).width(),
+                minWidth,
+                zoom = map.getZoom();
+
+            minWidth = (h < w) ? h : w;
+            if (minWidth < 500 && zoom < 10) {
+                map.setZoom(10);
+            }
+            else if (minWidth < 800 && zoom < 9) {
+                map.setZoom(9);
+            }
+            else if (zoom < 8) {
+                map.setZoom(8);
+            }
         };
 
     //////////////////////
@@ -175,10 +212,6 @@ var Trafikk = (function () {
         map = new google.maps.Map(document.getElementById(id), myOptions);
         // scale map by using the resize event
         $(window).trigger('resize');
-        // TODO: remove this when cron is ready
-        $('#run_update').click(function () {
-            update();
-        });
         // load off-page scripts
         $.getScript('js/trafikk.settings.js');
         return this;
