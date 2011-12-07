@@ -61,7 +61,7 @@ var Trafikk = (function () {
         getMessages = function getMessages() {
             $.mobile.loadingMessage = "Henter trafikkmeldinger";
             $.mobile.showPageLoadingMsg();
-            var url = 'messages/nearby/' + user.LatLng.lat() + '/' + user.LatLng.lon();
+            var url = 'messages/nearby/' + user.LatLng.lat() + '/' + user.LatLng.lng();
             if (sessionStorage && sessionStorage.getItem('extendedSearch') === "true") {
                 url += '/extended';
             }
